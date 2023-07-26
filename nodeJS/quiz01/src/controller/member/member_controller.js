@@ -1,38 +1,36 @@
 const member = require('../../database/member/memberDAO');
 
-const cnt = 0;
-
 const login = (req, res) => {
-    console.log("연동");
     res.render('member/login');
 }
 
 const loginCheck = (req, res) => {
     console.log("loginCheck");
+    let loggedIn = false;
     console.log(member);
     member.forEach(mem => {
-        if(mem.name === req.param("name") && mem.id === req.param("id")){
-            console.log("로그인 확인");
+        if(mem.name === req.query.name && mem.id === req.query.id){
             res.render('member/list', {member});
-            cnt++;
+            loggedIn = true;
         }
-        console.log("loginCheck2");
     });
-    res.render('member/login');
+    if (!loggedIn) {
+        res.render('member/login');
+    }
 }
 
 const memberInfo = (req, res) => {
-    console.log("memberInfo");
+    let loggedIn = false;
     member.forEach(mem => {
-        if(mem.name === req.param("name")){
-            console.log("로그인 확인");
+        if(mem.name === req.query.name){
             const userInfo = [mem.id, mem.name, mem.addr];
             res.render('member/info', {userInfo});
-            cnt++;
+            loggedIn = true;
         }
-        console.log("loginCheck2");
     });
-    res.render('member/memberInfo');
+    if (!loggedIn) {
+        res.render('member/memberInfo');
+    }
 }
 
 const memberList = (req, res) => {
