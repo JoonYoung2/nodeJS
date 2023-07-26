@@ -1,0 +1,18 @@
+<table border="1">
+    <tr>
+        <th>아이디</th>
+        <th>이 름</th>
+        <th>주 소</th>
+    </tr>
+    <%
+        member.forEach(mem => {
+    %>
+    <tr>
+        <td><%= mem.id %></td>
+        <td><a href="/member/info?name=<%=mem.name%>"><%= mem.name %></a></td>
+        <td><%= mem.addr %></td>
+    </tr>
+    <%
+        })
+    %>
+</table>
