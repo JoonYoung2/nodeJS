@@ -3,7 +3,6 @@ const router = require("./src/routes/common_router");
 const memberRouter = require("./src/routes/member/member_router");
 
 const app = express();
-const app2 = express();
 
 app.set("views", "./src/views");
 app.set("view engine", "ejs");
