@@ -1,0 +1,15 @@
+<%- include("../header") %>
+
+<% 
+    console.log("????????", member);
+    member.forEach((list) => {
+%>
+        id : <%= list.ID%><br>
+        pwd : <%= list.PWD%><br>
+        addr : <%= list.ADDR%><br>
+        name : <a href="/member/member_view/<%=list.ID%>"><%= list.NAME%></a><hr>
+<%
+    });
+%>
+
+<a href="/member/registerForm">등록하기</a>
