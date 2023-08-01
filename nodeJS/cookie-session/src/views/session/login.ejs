@@ -1,0 +1,13 @@
+<%if(nick != null){%>
+    <script>
+
+        alert("이미 로그인이 되었습니다."); 
+        location.href="/session/success";
+    </script>
+<%}%>
+
+<form action="/session/login_check" method="post">
+    아이디 <input type="text" name="id"><br>
+    비밀번호 <input type="text" name="pwd"><br>
+    <button type="submit">로그인</button>
+</form>

@@ -1,0 +1,38 @@
+
+<table border="1">
+    <tr>
+        <th>번호</th>
+        <th>이름</th>
+        <th>가격</th>
+    </tr>
+<%
+    list.forEach(item => {
+%>
+    <tr>
+        <td><%=item.goods_id%></td>
+        <td><a href="/cookie/save1?goods_id=<%=item.goods_id%>"><%=item.title%></a></td>
+        <td><%=item.price%></td>
+    </tr>
+<%
+    })
+%>
+</table>
+<table border="1">
+    <tr>
+        <th>번호</th>
+        <th>이름</th>
+        <th>가격</th>
+    </tr>
+<%
+    list.forEach(item => {
+%>
+    <tr>
+        <td><%=item.goods_id%></td>
+        <td><a href="/cookie/save2/<%=item.goods_id%>"><%=item.title%></a></td>
+        <td><%=item.price%></td>
+    </tr>
+<%
+    })
+%>
+</table>
+<a href="/cookie/viewList">선택상품확인</a>

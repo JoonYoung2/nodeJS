@@ -1,0 +1,23 @@
+<table border="1">
+    <tr>
+        <th><%=context.site[0][0]%></th>
+        <th><%=context.site[0][1]%></th>
+        <th><%=context.site[0][2]%></th>
+        <th><%=context.site[0][3]%></th>
+    </tr>
+    <%
+        var siteName = ['네이버', '구글', '다음']
+        
+        for(var i = 1; i < context.site.length; i++){
+            
+    %>
+            <tr>
+                <td style="text-align:center;"><b><%=context.site[i][0]%></b></td>
+                <td><a href="<%= context.site[i][1][Object.keys(context.site[i][1])]%>"><%=Object.keys(context.site[i][1])%></a></td>
+                <td><%= context.site[i][2]%></td>
+                <td><%= context.site[i][3]%></td>
+            </tr>    
+    <%
+        }
+    %>
+</table>

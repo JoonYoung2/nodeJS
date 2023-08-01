@@ -1,0 +1,8 @@
+<a href="/">HOME</a> 
+
+<% if(user_id == undefined){ %>
+<a href="/member/login_form">로그인</a>
+<% }else{ %>
+<a href="/member/logout">로그아웃</a>
+<%}%>
+<a href="/member/list">회원 정보</a>
