@@ -1,0 +1,9 @@
+<%- include("../default/header") %><hr>
+<h3>- 개인정보 수정 -</h3>
+<form action="/member/update" method="post">
+    <input type="text" name="id" readonly value="<%=member[0].ID%>"><br>
+    <input type="text" name="pwd" value="<%=member[0].PWD%>"><br>
+    <input type="text" name="name" value="<%=member[0].NAME%>"><br>
+    <input type="text" name="addr" value="<%=member[0].ADDR%>"><br>
+    <button>수정</button>
+</form>
