@@ -1,0 +1,46 @@
+<script
+  src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+<script>
+    var flag = false;
+    $("html").on("mouseleave", ()=>{flag = true;})
+    $("html").on("mouseenter", ()=>{flag = false;})
+    window.onbeforeunload=()=>{ //페이지가 변경될 때 실행되는 이벤트
+                                //<a> submit, button, 뒤로가기 등등 발생하면 이 함수가 실행된다.
+        if(flag){
+            fetch("/member/logout");
+        }
+
+    }
+    window.onload = () => {
+        console.log("cookie 확인");
+        console.log(document.cookie);
+        console.log(document.cookie.indexOf("isLogin=true"));
+        console.log(document.cookie.indexOf("isLogin111=true"));
+        let msg = "<a href='/'>HOME</a> ";
+
+        if(document.cookie.indexOf("isLogin=true") !== -1){
+            msg += "<a href='/member/logout'>로그아웃</a> ";
+            msg += "<a href='/member/list'>회원정보</a>";
+        }else{
+            msg += "<a href='/member/login_form'>로그인</a> ";
+            msg += "<a href='/member/login_form'>회원정보</a>";
+        }
+
+        document.querySelector("#nav").innerHTML = msg;
+    }
+</script>
+
+<hr>
+<span id="nav"></span> 
+<br>
+
+<a href="/">home</a> 
+<% if(user_id === undefined){ %>
+<a href="/member/login_form">로그인</a> 
+<a href="/member/login_form">회원정보</a>
+<% }else{ %>
+<a href="/member/logout">로그아웃</a> 
+<a href="/member/list">회원정보</a>
+<% } %>
+<hr>
