@@ -1,0 +1,119 @@
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+<script>
+    let content;
+    window.onload = () => {
+        content = document.getElementById("content");
+        let getMember = document.getElementById("getMembers");
+        getMember.addEventListener("click", getMembers);
+        let registerView = document.getElementById("registerView");
+        registerView.addEventListener("click", insertFromView)
+    }
+
+    const getMembers = () => {
+        fetch("/list", {method : "get"})
+        .then(res => res.json())
+        .then(data => {
+            let msg = `
+                <table border="1">
+                    <tr><th>아이디</th><th>비밀번호</th><th>이름</th></tr>
+            `;
+            data.forEach(member => {
+                msg += 
+                    `<tr>
+                        <td>${member.id}</td>
+                        <td>${member.pwd}</td>
+                        <td>${member.name}</td>
+                    </tr>`               
+            });
+            msg += "</table>";
+            content.innerHTML = msg;
+        })
+    }
+
+    const insertFromView = () => {
+        let msg = "";
+        msg += `
+            <form id="form" method="post">
+                아이디 : <input name="id" type="text"><br>
+                비밀번호 : <input name="pwd" type="text"><br>
+                이름 : <input name="name" type="text"><br>
+                <input type="button" value="등록" onclick="register()">
+            </form>
+        `
+        content.innerHTML = msg;
+    }
+
+    const register = () => {
+        const arr = $("#form").serializeArray();
+        let input = {};
+        
+        arr.forEach(list => {
+            input[list.name] = list.value;
+        })
+
+        fetch("/register", {
+            method : "post",
+            headers : {"Content-Type" : "application/json"},
+            body : JSON.stringify(input)
+        })
+        .then(res => res.json())
+        .then(result => {
+            getMembers();
+        })
+    }
+    const del = () => {
+        const delId = document.getElementById("del_id").value;
+        fetch("/delete", 
+        {
+            method : "delete",
+            headers : {"Content-Type" : "application/json"},
+            body : JSON.stringify({id : delId})
+        }
+            )
+        .then(res => res.json())
+        .then(result => {
+            getMembers();
+         })
+    }
+
+    const search = () => {
+        const sId = document.getElementById("s_id").value;
+        fetch("/memberInfo?id="+$("#s_id").val(), {method : "get"})
+        .then(res => res.json())
+        .then(data => {
+            if(data.id === undefined){
+                return;
+            }
+            let msg = "";
+            msg += `
+                <table border="1">
+                    <tr>
+                        <th>아이디</th>
+                        <th>비밀번호</th>
+                        <th>이름</th>
+                    </tr>
+                    <tr>
+                        <td>${data.id}</td>
+                        <td>${data.pwd}</td>
+                        <td>${data.name}</td>
+                    </tr>
+                </table>
+            `;
+            content.innerHTML = msg;
+        })
+    }
+
+    
+</script>
+
+<div id="content"></div>
+<hr>
+<button type="button" id="getMembers">목록보기</button>
+<button type="button" id="registerView">데이터 추가</button>
+<hr>
+<input type="text" id="del_id">
+<button type="button" onclick="del()">삭제</button>
+
+<input type="text" id="s_id">
+<button type="button" onclick="search()">조회</button>

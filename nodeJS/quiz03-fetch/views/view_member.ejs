@@ -1,0 +1,34 @@
+<script>
+    window.onload = () => {
+        let memberListBtn = document.getElementById("memberListBtn");
+        memberListBtn.addEventListener("click", addMemberView);
+        let memberList = document.getElementById("memberList");
+    }
+    let cnt = 0;
+    const addMemberView = () => {
+        fetch("/addMember", {method : "get"})
+        .then(res => res.json())
+        .then(data => {
+            let msg = "";
+            cnt += 3;
+            for(var i = 0; i < cnt; i++){
+                if(cnt > data.length){
+                    cnt = data.length;
+                }
+                if(cnt <= data.length){
+                    msg += `${data[i].id}, ${data[i].pwd}, ${data[i].name}<br>`;
+                }
+            }
+            memberList.innerHTML = msg;
+        })
+    }
+
+    const memberReset = () => {
+        cnt = 0;
+        memberList.innerHTML = "";
+    }
+</script>
+<div id="memberList"></div>
+<hr>
+<input type="button" id="memberListBtn" value="3person add view">
+<input type="button" onclick="memberReset();" value="reset">

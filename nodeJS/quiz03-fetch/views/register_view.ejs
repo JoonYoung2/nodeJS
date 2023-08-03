@@ -1,0 +1,32 @@
+<script>
+    
+    const suaAngrybird = () => {
+        const checkId = document.getElementById("id").value;
+        const msg = document.getElementById("msg");
+        if(checkId.length === 0){
+            msg.innerHTML = "<b>id 확인</b>";
+            return;
+        }else if(checkId.length < 3 && checkId.length > 0){
+            msg.innerHTML = "<b>too much short</b>"
+            return;
+        }
+
+        fetch("/checkId/"+checkId, {method : "get"})
+        .then(res => res.json())
+        .then(data => {
+            if(data === 1){
+                msg.innerHTML = "<b>ID exists hey nono</b>";
+            }else{
+                msg.innerHTML = "<b>This ID is available very good job</b>"
+            }
+        })
+    }
+</script>
+
+<form>
+    <input oninput="suaAngrybird()" id = "id" name = "id" placeholder="input id" type="text"><span id="msg"></span><br>
+    <input id = "pwd" name = "pwd" placeholder="input pwd" type="text"><br>
+    <input id = "name" name = "name" placeholder="input name" type="text"><br>
+    <input id = "addr" name = "addr" placeholder="input address" type="text"><br>
+    <input type="button" value="register">
+</form>
