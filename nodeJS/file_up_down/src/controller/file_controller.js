@@ -47,7 +47,7 @@ const process = {
     },
 
     deleteFile : (req, res) => {
-        fs.unlinkSync(`./upload_file/${req.params.fileName}`); // 비동기 방식, 동기 방식 = unlink
+        fs.unlinkSync(`./upload_file/${req.params.fileName}`); // 동기 방식, 비동기 방식 = unlink
         res.redirect("/file/list");
     },
 
