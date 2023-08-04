@@ -2,6 +2,13 @@
 
 <form action="/file/upload" method="post" enctype="multipart/form-data">
     <input type="text" name="title"><br>
-    <input type="file" name="file_name"><br>
+
+    <img src="#" id="preview" width="100px" height="100px" alt="이미지가 없습니다."><br>
+
+    <input type="file" name="file_name" onchange="readURL(this)"><br> <!--this == input 태그 자체-->
     <input type="submit" value="전송">
 </form>
+
+<a href="/file/list">파일 목록 보기</a>
+
+<script src="/static/js/image_read.js"></script>

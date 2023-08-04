@@ -39,6 +39,12 @@ router.post("/upload", upload.single("file_name"), fileController.process.upload
 
 router.get("/list", fileController.views.list);
 
-router.get("/modifyForm", fileController.views.modifyForm);
+router.get("/download/:fileName", fileController.views.download);
+
+router.get("/deleteFile/:fileName", fileController.process.deleteFile);
+
+router.get("/modify_form/:fileName", fileController.views.modifyForm);
+
+router.post("/modify", upload.single("newFileName"), fileController.process.modify);
 
 module.exports = router;

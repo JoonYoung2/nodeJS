@@ -1,1 +1,10 @@
-<h3> 수정 폼 입니당 </h3>
+<form action="/file/modify" method="post" enctype="multipart/form-data">
+    <input type="text" name="title"><br>
+    <input type="hidden" name="originFileName" value="<%=fileName%>">
+    <img src="/file/download/<%=fileName%>" id="preview" width="100px" height="100px" alt="이미지가 없습니다."><br>
+
+    <input type="file" name="newFileName" onchange="readURL(this)"><br> <!--this == input 태그 자체-->
+    <input type="submit" value="전송">
+</form>
+
+<script src="/static/js/image_read.js"></script>
