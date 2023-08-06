@@ -12,6 +12,3 @@ const sessionConfig = {
 }
 
 module.exports = { sessionConfig };
-
-
-

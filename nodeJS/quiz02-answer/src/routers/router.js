@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({ extended : true}));
 app.use( session(sessionConfig) );
     
     app.get("/", (req,res) => {
-        console.log("session is ",req.session.userId);
+        console.log("session is ", req.session.userId);
         if(req.session.userId){
             console.log("여기오니??");
             res.cookie("isLogin", true);
